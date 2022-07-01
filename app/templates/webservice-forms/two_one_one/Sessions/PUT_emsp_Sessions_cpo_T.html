@@ -1,0 +1,72 @@
+<ul class="list-group">
+  <li class="list-group-item active font-weight-bold">Request template</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">URL</li>
+  <li class="list-group-item">
+  {{constants.SERVER_URL}}/ocpi/emsp/2.1.1/sessions/{% for p in parameters if p.key == p.USER_COUNTRY_CODE %}{{ p.value }}{% else%}<b>country_code not defined in Parameters</b>{% endfor %}/{% for p in parameters if p.key == p.USER_PARTY_ID %}{{ p.value }}{% else%}<b>party_id not defined in Parameters</b>{% endfor %}/{SESSION_ID}</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">HTTP Verb</li>
+  <li class="list-group-item">PUT</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">Headers</li>
+  <li class="list-group-item">content-type : application/json</li>
+  <li class="list-group-item">Authorization : Token {% for p in parameters if p.key == p.AUTHORISATION_TOKEN_TOSERVER %}{{ p.value }}{% endfor %}</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">Body</li>
+  <li class="list-group-item">{<br/>
+	"id": "{SESSION_ID}",<br/>
+	"start_datetime": "{SESSION_START_DATETIME}",<br/>
+	"kwh": {SESSION_KWH},<br/>
+	"auth_id": "{SESSION_AUTH_ID}",<br/>
+	"auth_method": "{SESSION_AUTH_METHOD}",<br/>
+	"location": {<br/>
+		"id": "{SESSION_LOCATION_ID}",<br/>
+		"type": "{SESSION_LOCATION_TYPE}",<br/>
+		"name": "{SESSION_LOCATION_NAME}",<br/>
+		"address": "{SESSION_LOCATION_ADDRESS}",<br/>
+		"city": "{SESSION_LOCATION_CITY}",<br/>
+		"postal_code": "{SESSION_LOCATION_POSTAL_CODE}",<br/>
+		"country": "{SESSION_LOCATION_COUNTRY}",<br/>
+		"coordinates": {<br/>
+			"latitude": "{SESSION_LOCATION_LATITUDE}",<br/>
+			"longitude": "{SESSION_LOCATION_LONGITUDE}"<br/>
+		},<br/>
+		"evses": [<br/>
+			{<br/>
+				"uid": "{SESSION_LOCATION_EVSE_UID}",<br/>
+				"evse_id": "{SESSION_LOCATION_EVSE_EVSE_ID}",<br/>
+				"status": "{SESSION_LOCATION_EVSE_STATUS}",<br/>
+				"status_schedule": [],<br/>
+				"capabilities": [],<br/>
+				"connectors": [<br/>
+					{<br/>
+						"id": "{SESSION_LOCATION_CONNECTOR_ID}",<br/>
+						"standard": "{SESSION_LOCATION_CONNECTOR_STANDARD}",<br/>
+						"format": "{SESSION_LOCATION_CONNECTOR_FORMAT}",<br/>
+						"power_type": "{SESSION_LOCATION_CONNECTOR_POWER_TYPE}",<br/>
+						"voltage": {SESSION_LOCATION_CONNECTOR_VOLTAGE},<br/>
+						"amperage": {SESSION_LOCATION_CONNECTOR_AMPERAGE},<br/>
+						"tariff_id": "{SESSION_LOCATION_CONNECTOR_TARIFF_ID}",<br/>
+						"last_updated": "{SESSION_LOCATION_CONNECTOR_LAST_UPDATED}"<br/>
+					}<br/>
+				],<br/>
+				"floor_level": "{SESSION_LOCATION_FLOOR_LEVEL}",<br/>
+				"coordinates": {<br/>
+					"latitude": "{SESSION_LOCATION_EVSE_LATITUDE}",<br/>
+					"longitude": "{SESSION_LOCATION_EVSE_LONGITUDE}"<br/>
+				},<br/>
+				"physical_reference": "{SESSION_LOCATION_EVSE_PHYSICAL_REFERENCE}",<br/>
+				"last_updated": "{SESSION_LOCATION_EVSE_LAST_UPDATED}"<br/>
+			}<br/>
+		],<br/>
+		"directions": [],<br/>
+		"operator": {<br/>
+			"name": "{SESSION_LOCATION_OPERATOR_NAME}"<br/>
+		},<br/>
+		"facilities": [<br/>
+			"{SESSION_LOCATION_FACILITIES}"<br/>
+		],<br/>
+		"charging_when_closed": {SESSION_LOCATION_CHARGING_WHEN_CLOSED},<br/>
+		"last_updated": "{SESSION_LOCATION_LAST_UPDATED}"<br/>
+	},<br/>
+	"currency": "{SESSION_CURRENCY}",<br/>
+	"status": "{SESSION_STATUS}",<br/>
+	"last_updated": "{SESSION_LAST_UPDATED}"<br/>
+}</li>
+</ul>

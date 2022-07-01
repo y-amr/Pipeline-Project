@@ -1,0 +1,10 @@
+<form id="launchRequest" action="/">
+    <div class="form-group">
+        <label for="cdr_url">CDR Url</label>
+        <input type="text" class="form-control" id="cdr_url" name="cdr_url" {% for p in parameters if p.key == p.ENDPOINT %}value="{{ p.value }}{TO_COMPLETE}"{% endfor %} />
+    </div>
+    <button type="button" class="btn btn-primary"
+            onclick="launchForm('/fromserver/ocpi/cpo/2.1.1/cdrs/GET_emsp_Cdrs');">
+        Send
+    </button>
+</form>

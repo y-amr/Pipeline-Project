@@ -1,0 +1,10 @@
+<form id="launchRequest" action="/">
+    <div class="form-group">
+        <label for="location_id">Location Id</label>
+        <input type="text" class="form-control" id="location_id" name="location_id" placeholder="default : {{constants.DEFAULT_ID_CONSTANT}}"/>
+    </div>
+    <button type="button" class="btn btn-primary"
+            onclick="launchForm('/fromserver/ocpi/cpo/2.1.1/locations/GET_emsp_Locations');">
+        Send
+    </button>
+</form>

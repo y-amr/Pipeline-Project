@@ -1,0 +1,16 @@
+{
+  "type":"object",
+  "properties":{
+            "language":{
+               "type":"string",
+               "maxLength":2
+            },
+            "text":{
+               "type":"string",
+               "maxLength":512
+            }
+         },
+         "required":[
+            "language"
+         ]
+}

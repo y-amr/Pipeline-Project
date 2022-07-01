@@ -1,0 +1,27 @@
+{% extends "squelette.html" %}
+{% block content %}
+{{ super() }}
+<!-- Corps de la page -->
+<div class="page-content">
+    <form id="launchRequest" action="/">
+        <select class="form-select" aria-label="Environment" name="env" id="env">
+          <option value="IOP-PP">IOP-PP</option>
+          <option value="IOP-R7">IOP-R7</option>
+          <option value="IOP-Prod">IOP-Prod</option>
+        </select>
+        <button type="button" class="btn btn-primary"
+                onclick="launchForm('/web/non_reg');">
+            Send
+        </button>
+    </form>
+    <div class="card scroll">
+      <div class="card-body">
+        <h4 class="card-title mb-0">Requests</h4>
+        <div id="result">
+        </div>
+      </div>
+    </div>
+</div>
+{% include "footer.html" %}
+    <script src="{{url_for('static', filename='scripts/nonreg/nonreg.js')}}"></script>
+{% endblock %}

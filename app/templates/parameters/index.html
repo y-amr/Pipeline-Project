@@ -1,0 +1,177 @@
+{% extends "squelette.html" %}
+{% block content %}
+{{ super() }}
+<!-- Corps de la page -->
+<div class="page-content">
+{#        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+Register From Server
+</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <ul class="list-group">
+               <li class="list-group-item active font-weight-bold">Response</li>
+               <li class="list-group-item list-group-item-primary font-weight-bold">URL</li>
+            </ul>
+         </div>
+         <div class="modal-body">
+            <form id="registerWithPostCredentials" action="/" >
+               <label for="URL_POST_CREDENTIALS">Url Post Credentials</label>
+               <div class="form-group">
+                  <label for="URL_POST_CREDENTIALS">Url Post Credentials</label>
+                  <input type="url" class="form-control" id="URL_POST_CREDENTIALS" name="URL_POST_CREDENTIALS" aria-describedby="endpoint_notice" placeholder="Please enter your Post Credentials url" >
+               </div>
+               <button type="button" class="btn btn-primary"
+                  onclick="credentials();">
+               Send
+               </button>
+               Register with Post Credentials
+               </button>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+#}
+<form action="/web/parameters" method="POST">
+   <div class="form-group">
+      <label for="client_country_code">Your country code</label>
+      <input type="text" class="form-control" id="{{ parametersForm.USER_COUNTRY_CODE }}" name="{{ parametersForm.USER_COUNTRY_CODE }}" aria-describedby="client_country_code_notice" placeholder="Please enter your country_code" maxlength="2" {% for p in parameters if p.key == parametersForm.USER_COUNTRY_CODE %} value="{{ p.value }}" {% endfor %}>
+      <small id="client_country_code_notice" class="form-text text-muted">Please enter your country code.</small>
+   </div>
+   <div class="form-group">
+      <label for="client_party_id">Your party ID</label>
+      <input type="text" class="form-control" id="{{ parametersForm.USER_PARTY_ID }}" name="{{ parametersForm.USER_PARTY_ID }}" aria-describedby="toserver_party_id_notice" placeholder="Please enter your party_id" maxlength="3" {% for p in parameters if p.key == parametersForm.USER_PARTY_ID %} value="{{ p.value }}" {% endfor %}>
+      <small id="client_party_id_notice" class="form-text text-muted">Please enter your party ID.</small>
+   </div>
+   <div class="form-group">
+      <label for="endpoint">Your endpoint</label>
+      <button type="button" style="float: right" class="btn btn-outline-success" onClick="generateEndpoint();">Generate all endpoints</button>
+      <input type="url" class="form-control" id="{{ parametersForm.ENDPOINT }}" name="{{ parametersForm.ENDPOINT }}" aria-describedby="endpoint_notice" placeholder="Please enter your endpoint" {% for p in parameters if p.key == parametersForm.ENDPOINT %} value="{{ p.value }}" {% endfor %}>
+      <small id="endpoint_notice" class="form-text text-muted">Please specify the base URL of your server. https://api.hostname.com</small>
+   </div>
+   <div class="accordion" id="accordionExample">
+      <div class="card">
+         <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+               <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+               CPO
+               </button>
+            </h2>
+         </div>
+         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+               <div class="form-group">
+                  <label for="endpoint">TOKENS</label>
+                  <input type="url" class="form-control" id="{{ parametersForm.ENDPOINT_211_CPO_TOKENS }}" name="{{ parametersForm.ENDPOINT_211_CPO_TOKENS }}" aria-describedby="endpoint_notice" placeholder="Please enter your cpo tokens endpoint" {% for p in parameters if p.key == parametersForm.ENDPOINT_211_CPO_TOKENS %} value="{{ p.value }}" {% endfor %}>
+               </div>
+               <div class="form-group">
+                  <label for="endpoint">COMMANDS</label>
+                  <input type="url" class="form-control" id="{{ parametersForm.ENDPOINT_211_CPO_COMMANDS }}" name="{{ parametersForm.ENDPOINT_211_CPO_COMMANDS }}" aria-describedby="endpoint_notice" placeholder="Please enter your cpo commands endpoint" {% for p in parameters if p.key == parametersForm.ENDPOINT_211_CPO_COMMANDS %} value="{{ p.value }}" {% endfor %}>
+               </div>
+               <div class="form-group">
+                  <label for="endpoint">CDRS</label>
+                  <input type="url" class="form-control" id="{{ parametersForm.ENDPOINT_211_CPO_CDRS }}" name="{{ parametersForm.ENDPOINT_211_CPO_CDRS }}" aria-describedby="endpoint_notice" placeholder="Please enter your cpo CDRS endpoint" {% for p in parameters if p.key == parametersForm.ENDPOINT_211_CPO_CDRS %} value="{{ p.value }}" {% endfor %}>
+               </div>
+               <div class="form-group">
+                  <label for="endpoint">SESSIONS</label>
+                  <input type="url" class="form-control" id="{{ parametersForm.ENDPOINT_211_CPO_SESSIONS }}" name="{{ parametersForm.ENDPOINT_211_CPO_SESSIONS }}" aria-describedby="endpoint_notice" placeholder="Please enter your cpo sessions endpoint" {% for p in parameters if p.key == parametersForm.ENDPOINT_211_CPO_SESSIONS %} value="{{ p.value }}" {% endfor %}>
+               </div>
+               <div class="form-group">
+                  <label for="endpoint">LOCATIONS</label>
+                  <input type="url" class="form-control" id="{{ parametersForm.ENDPOINT_211_CPO_LOCATIONS }}" name="{{ parametersForm.ENDPOINT_211_CPO_LOCATIONS }}" aria-describedby="endpoint_notice" placeholder="Please enter your cpo locations endpoint" {% for p in parameters if p.key == parametersForm.ENDPOINT_211_CPO_LOCATIONS %} value="{{ p.value }}" {% endfor %}>
+               </div>
+               <div class="form-group">
+                  <label for="endpoint">VERSIONS</label>
+                  <input type="url" class="form-control" id="{{ parametersForm.ENDPOINT_211_CPO_VERSIONS }}" name="{{ parametersForm.ENDPOINT_211_CPO_VERSIONS }}" aria-describedby="endpoint_notice" placeholder="Please enter your cpo versions endpoint" {% for p in parameters if p.key == parametersForm.ENDPOINT_211_CPO_VERSIONS %} value="{{ p.value }}" {% endfor %}>
+               </div>
+               <div class="form-group">
+                  <label for="endpoint">CREDENTIALS</label>
+                  <input type="url" class="form-control" id="{{ parametersForm.ENDPOINT_211_CPO_CREDENTIALS}}" name="{{ parametersForm.ENDPOINT_211_CPO_CREDENTIALS }}" aria-describedby="endpoint_notice" placeholder="Please enter your cpo credentials endpoint" {% for p in parameters if p.key == parametersForm.ENDPOINT_211_CPO_CREDENTIALS %} value="{{ p.value }}" {% endfor %}>
+               </div>
+               <div class="form-group">
+                  <label for="endpoint">TARIFFS</label>
+                  <input type="url" class="form-control" id="{{ parametersForm.ENDPOINT_211_CPO_TARIFFS}}" name="{{ parametersForm.ENDPOINT_211_CPO_TARIFFS }}" aria-describedby="endpoint_notice" placeholder="Please enter your cpo tariffs endpoint" {% for p in parameters if p.key == parametersForm.ENDPOINT_211_CPO_TARIFFS %} value="{{ p.value }}" {% endfor %}>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="card">
+         <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+               <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+               EMSP
+               </button>
+            </h2>
+         </div>
+         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+               <div class="form-group">
+                  <label for="endpoint">TOKENS</label>
+                  <input type="url" class="form-control" id="{{ parametersForm.ENDPOINT_211_EMSP_TOKENS }}" name="{{ parametersForm.ENDPOINT_211_EMSP_TOKENS }}" aria-describedby="endpoint_notice" placeholder="Please enter your emsp tokens endpoint" {% for p in parameters if p.key == parametersForm.ENDPOINT_211_EMSP_TOKENS %} value="{{ p.value }}" {% endfor %}>
+               </div>
+               <div class="form-group">
+                  <label for="endpoint">COMMANDS</label>
+                  <input type="url" class="form-control" id="{{ parametersForm.ENDPOINT_211_EMSP_COMMANDS }}" name="{{ parametersForm.ENDPOINT_211_EMSP_COMMANDS }}" aria-describedby="endpoint_notice" placeholder="Please enter your emsp commands endpoint" {% for p in parameters if p.key == parametersForm.ENDPOINT_211_EMSP_COMMANDS %} value="{{ p.value }}" {% endfor %}>
+               </div>
+               <div class="form-group">
+                  <label for="endpoint">CDRS</label>
+                  <input type="url" class="form-control" id="{{ parametersForm.ENDPOINT_211_EMSP_CDRS }}" name="{{ parametersForm.ENDPOINT_211_EMSP_CDRS }}" aria-describedby="endpoint_notice" placeholder="Please enter your emsp CDRS endpoint" {% for p in parameters if p.key == parametersForm.ENDPOINT_211_EMSP_CDRS %} value="{{ p.value }}" {% endfor %}>
+               </div>
+               <div class="form-group">
+                  <label for="endpoint">SESSIONS</label>
+                  <input type="url" class="form-control" id="{{ parametersForm.ENDPOINT_211_EMSP_SESSIONS }}" name="{{ parametersForm.ENDPOINT_211_EMSP_SESSIONS }}" aria-describedby="endpoint_notice" placeholder="Please enter your emsp sessions endpoint" {% for p in parameters if p.key == parametersForm.ENDPOINT_211_EMSP_SESSIONS %} value="{{ p.value }}" {% endfor %}>
+               </div>
+               <div class="form-group">
+                  <label for="endpoint">LOCATIONS</label>
+                  <input type="url" class="form-control" id="{{ parametersForm.ENDPOINT_211_EMSP_LOCATIONS }}" name="{{ parametersForm.ENDPOINT_211_EMSP_LOCATIONS }}" aria-describedby="endpoint_notice" placeholder="Please enter your emsp locations endpoint" {% for p in parameters if p.key == parametersForm.ENDPOINT_211_EMSP_LOCATIONS %} value="{{ p.value }}" {% endfor %}>
+               </div>
+               <div class="form-group">
+                  <label for="endpoint">VERSIONS</label>
+                  <input type="url" class="form-control" id="{{ parametersForm.ENDPOINT_211_EMSP_VERSIONS }}" name="{{ parametersForm.ENDPOINT_211_EMSP_VERSIONS }}" aria-describedby="endpoint_notice" placeholder="Please enter your emsp versions endpoint" {% for p in parameters if p.key == parametersForm.ENDPOINT_211_EMSP_VERSIONS %} value="{{ p.value }}" {% endfor %}>
+               </div>
+               <div class="form-group">
+                  <label for="endpoint">CREDENTIALS</label>
+                  <input type="url" class="form-control" id="{{ parametersForm.ENDPOINT_211_EMSP_CREDENTIALS}}" name="{{ parametersForm.ENDPOINT_211_EMSP_CREDENTIALS }}" aria-describedby="endpoint_notice" placeholder="Please enter your emsp credentials endpoint" {% for p in parameters if p.key == parametersForm.ENDPOINT_211_EMSP_CREDENTIALS %} value="{{ p.value }}" {% endfor %}>
+               </div>
+               <div class="form-group">
+                  <label for="endpoint">TARIFFS</label>
+                  <input type="url" class="form-control" id="{{ parametersForm.ENDPOINT_211_EMSP_TARIFFS}}" name="{{ parametersForm.ENDPOINT_211_EMSP_TARIFFS }}" aria-describedby="endpoint_notice" placeholder="Please enter your emsp tariffs endpoint" {% for p in parameters if p.key == parametersForm.ENDPOINT_211_EMSP_TARIFFS %} value="{{ p.value }}" {% endfor %}>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="form-group">
+      <label for="server_country_code">Country code of the GIREVE test server</label>
+      <input type="text" class="form-control" id="{{ parametersForm.SERVER_COUNTRY_CODE }}" name="{{ parametersForm.SERVER_COUNTRY_CODE }}" aria-describedby="server_country_code_notice" placeholder="Please enter the country code of the GIREVE test server" maxlength="2" {% for p in parameters if p.key == parametersForm.SERVER_COUNTRY_CODE %} value="{{ p.value }}" {% endfor %}>
+      <small id="server_country_code_notice" class="form-text text-muted">Please enter the country_code of the GIREVE test server.</small>
+   </div>
+   <div class="form-group">
+      <label for="server_party_id">Party ID of the GIREVE test server</label>
+      <input type="text" class="form-control" id="{{ parametersForm.SERVER_PARTY_ID }}" name="{{ parametersForm.SERVER_PARTY_ID }}" aria-describedby="server_party_id_notice" placeholder="Please enter the party_id of the GIREVE test server" maxlength="3" {% for p in parameters if p.key == parametersForm.SERVER_PARTY_ID %} value="{{ p.value }}" {% endfor %}>
+      <small id="server_party_id_notice" class="form-text text-muted">Please enter the party_id of the GIREVE test server.</small>
+   </div>
+   <div class="form-group">
+      <label for="tokenidtoserver">Authorization Token ToServer</label>
+      <div class="row" style="margin-left: 0;margin-right:0">
+         <input type="text" class="col-10 form-control" id="{{ parametersForm.AUTHORISATION_TOKEN_TOSERVER }}" name="{{ parametersForm.AUTHORISATION_TOKEN_TOSERVER }}" aria-describedby="tokenid_notice" placeholder="Please enter the Authorization Token ToServer" {% for p in parameters if p.key == parametersForm.AUTHORISATION_TOKEN_TOSERVER %} value="{{ p.value }}" {% endfor %}>
+         <button type="button" style="float: right" class="col btn btn-outline-success" onClick="generateRandomToken('AUTHORISATION_TOKEN_TOSERVER');">Generate a UID</button>
+         <small id="tokenid_notice" class="form-text text-muted">Please enter the authorization Token ToServer.</small>
+      </div>
+      <div class="form-group">
+         <label for="{{ parametersForm.AUTHORISATION_TOKEN_FROMSERVER }}">Authorization Token FromServer</label>
+         <div class="row" style="margin-left: 0;margin-right:0">
+            <input type="text" class="col-10 form-control" id="{{ parametersForm.AUTHORISATION_TOKEN_FROMSERVER }}" name="{{ parametersForm.AUTHORISATION_TOKEN_FROMSERVER }}" aria-describedby="tokenid_notice" placeholder="Please enter the Authorization Token FromServer" {% for p in parameters if p.key == parametersForm.AUTHORISATION_TOKEN_FROMSERVER %} value="{{ p.value }}" {% endfor %}>
+            <button type="button" style="float: right" class="col btn btn-outline-success" onClick="generateRandomToken('AUTHORISATION_TOKEN_FROMSERVER');">Generate a UID</button>
+         </div>
+         <small id="tokenid_notice" class="form-text text-muted">Please enter the authorization Token FromServer.</small>
+      </div>
+   </div>
+   <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+{% include "footer.html" %}
+<script src="{{url_for('static', filename='scripts/parameters/parameters.js')}}"></script>
+{% endblock %}

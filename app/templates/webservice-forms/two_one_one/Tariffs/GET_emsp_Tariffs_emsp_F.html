@@ -1,0 +1,10 @@
+<form id="launchRequest" action="/">
+    <div class="form-group">
+        <label for="tariff_id">Tariff Id</label>
+        <input type="text" class="form-control" id="tariff_id" name="tariff_id" placeholder="default : {{constants.DEFAULT_ID_CONSTANT}}"/>
+    </div>
+    <button type="button" class="btn btn-primary"
+            onclick="launchForm('/fromserver/ocpi/cpo/2.1.1/tariffs/GET_emsp_Tariffs');">
+        Send
+    </button>
+</form>

@@ -1,0 +1,27 @@
+<form id="setWebserviceParameters" action="/">
+    <div class="form-group">
+        <label for="GET_MAX_LIMIT">Server max limit</label>
+        <input type="number" min="0" class="form-control" id="GET_MAX_LIMIT" name="GET_MAX_LIMIT" placeholder="default : {{constants.DEFAULT_GET_MAX_LIMIT_CONSTANT}}" {% for p in parameters if p.key == p.GET_MAX_LIMIT %}value="{{ p.value }}"{% endfor %}/>
+    </div>
+    <div class="form-group">
+        <label for="GET_NUMBER_ITEMS_RETURNED">Numbers of items returned</label>
+        <input type="number" min="0" class="form-control" id="GET_NUMBER_ITEMS_RETURNED" name="GET_NUMBER_ITEMS_RETURNED" placeholder="default : {{constants.DEFAULT_GET_NUMBER_ITEMS_RETURNED_CONSTANT}}" {% for p in parameters if p.key == p.GET_NUMBER_ITEMS_RETURNED %}value="{{ p.value }}"{% endfor %}/>
+    </div>
+    <button type="button" class="btn btn-primary"
+            onclick="setWebserviceParameters()">
+        Save
+    </button>
+</form><br/><br/>
+
+<ul class="list-group">
+  <li class="list-group-item active font-weight-bold">Request template</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">URL</li>
+  <li class="list-group-item">
+  {{constants.SERVER_URL}}/ocpi/cpo/2.1.1/locations?date_from={DATE_FROM}&date_to={DATE_TO}&offset={OFFSET}&limit={LIMIT}</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">HTTP Verb</li>
+  <li class="list-group-item">GET</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">Headers</li>
+  <li class="list-group-item">Authorization : Token {% for p in parameters if p.key == p.AUTHORISATION_TOKEN_TOSERVER %}{{ p.value }}{% endfor %}</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">Body</li>
+  <li class="list-group-item">Empty</li>
+</ul>

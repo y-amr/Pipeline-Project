@@ -1,0 +1,21 @@
+<form id="launchRequest" action="/">
+    <div class="form-group">
+        <label for="command_url">Command callback Url</label>
+        <input type="text" class="form-control" id="command_url" name="command_url" {% for p in parameters if p.key==
+               p.ENDPOINT %}value="{{ p.value }}{TO_COMPLETE}" {% endfor %}/>
+    </div>
+    <div class="form-group">
+        <label for="command_response">Command response</label>
+        <select class="form-control" name="command_response" id="command_response">
+            <option value="ACCEPTED">ACCEPTED</option>
+            <option value="NOT_SUPPORTED">NOT_SUPPORTED</option>
+            <option value="REJECTED">REJECTED</option>
+            <option value="TIMEOUT">TIMEOUT</option>
+            <option value="UNKNOWN_SESSION">UNKNOWN_SESSION</option>
+        </select>
+    </div>
+    <button type="button" class="btn btn-primary"
+            onclick="launchForm('/fromserver/ocpi/cpo/2.1.1/commands/POST_emsp_commands-callback');">
+        Send
+    </button>
+</form>

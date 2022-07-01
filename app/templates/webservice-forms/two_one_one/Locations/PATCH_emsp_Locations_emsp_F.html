@@ -1,0 +1,89 @@
+<form id="launchRequest" action="/">
+    <div class="form-group">
+        <label for="location_id">Location Id</label>
+        <input type="text" class="form-control" id="location_id" name="location_id" placeholder="default : {{constants.DEFAULT_ID_CONSTANT}}"/>
+    </div>
+    <div class="form-group">
+        <label for="request_template">Request template : </label>
+        <textarea class="form-control" id="request_template" name="request_template" style="padding-bottom:25px;" rows="10">
+{
+	"id": "{{constants.DEFAULT_ID_CONSTANT}}",
+	"type": "UNKNOWN",
+	"name": "111111",
+	"address": "address of the Locations",
+	"city": "city of the Locations",
+	"postal_code": "75001",
+	"country": "FRA",
+	"coordinates": {
+		"latitude": "48.804399",
+		"longitude": "2.17151"
+	},
+	"related_locations": [],
+	"evses": [
+		{
+			"uid": "AAAAAA",
+			"evse_id": "FR*CPO*E1",
+			"status": "AVAILABLE",
+			"status_schedule": [],
+			"capabilities": [],
+			"connectors": [
+				{
+					"id": "1",
+					"standard": "IEC_62196_T3A",
+					"format": "SOCKET",
+					"power_type": "AC_3_PHASE",
+					"voltage": 400,
+					"amperage": 10,
+					"tariff_id": "82",
+					"last_updated": "2020-01-01T00:00:00Z"
+				}
+			],
+			"floor_level": "1",
+			"coordinates": {
+				"latitude": "48.804399",
+				"longitude": "2.17151"
+			},
+			"physical_reference": "AAAAAA",
+			"last_updated": "2020-01-01T00:00:00Z"
+		},
+		{
+			"uid": "BBBBBB",
+			"evse_id": "FR*CPO*E2",
+			"status": "AVAILABLE",
+			"status_schedule": [],
+			"capabilities": [],
+			"connectors": [
+				{
+					"id": "1",
+					"standard": "IEC_62196_T3A",
+					"format": "SOCKET",
+					"power_type": "AC_3_PHASE",
+					"voltage": 400,
+					"amperage": 10,
+					"tariff_id": "82",
+					"last_updated": "2020-01-01T00:00:00Z"
+				}
+			],
+			"floor_level": "1",
+			"coordinates": {
+				"latitude": "48.804399",
+				"longitude": "2.17151"
+			},
+			"physical_reference": "BBBBBB",
+			"last_updated": "2020-01-01T00:00:00Z"
+		}
+	],
+	"directions": [],
+	"operator": {
+		"name" : "GIREVE Test CPO"
+	},
+	"facilities": ["SUPERMARKET"],
+	"charging_when_closed": false,
+	"last_updated": "2020-01-01T00:00:00Z"
+}</textarea>
+    </div>
+    <button type="button" class="btn btn-primary"
+            onclick="launchForm('/fromserver/ocpi/cpo/2.1.1/locations/PATCH_emsp_Locations');">
+        Send
+    </button>
+</form>

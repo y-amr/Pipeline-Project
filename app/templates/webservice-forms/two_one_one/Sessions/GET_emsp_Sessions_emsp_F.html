@@ -1,0 +1,10 @@
+<form id="launchRequest" action="/">
+    <div class="form-group">
+        <label for="session_id">Session Id</label>
+        <input type="text" class="form-control" id="session_id" name="session_id" placeholder="default : {{constants.DEFAULT_ID_CONSTANT}}"/>
+    </div>
+    <button type="button" class="btn btn-primary"
+            onclick="launchForm('/fromserver/ocpi/cpo/2.1.1/sessions/GET_emsp_Sessions');">
+        Send
+    </button>
+</form>

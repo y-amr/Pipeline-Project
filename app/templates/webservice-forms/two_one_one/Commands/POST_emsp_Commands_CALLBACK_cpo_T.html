@@ -1,0 +1,15 @@
+<ul class="list-group">
+  <li class="list-group-item active font-weight-bold">Request template</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">URL</li>
+  <li class="list-group-item">
+  {{constants.SERVER_URL}}/ocpi/emsp/2.1.1/commands/{SESSION_ID}</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">HTTP Verb</li>
+  <li class="list-group-item">POST</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">Headers</li>
+  <li class="list-group-item">content-type : application/json</li>
+  <li class="list-group-item">Authorization : Token {% for p in parameters if p.key == p.AUTHORISATION_TOKEN_TOSERVER %}{{ p.value }}{% endfor %}</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">Body</li>
+  <li class="list-group-item">{<br/>
+	"result": {COMMANDS_RESULT}<br/>
+}</li>
+</ul>

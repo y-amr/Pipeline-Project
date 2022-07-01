@@ -1,0 +1,45 @@
+<form id="setWebserviceParameters" action="/">
+    <div class="form-group">
+        <label for="POST_COMMANDS_RESPONSE_TYPE">Commands response returned by the server</label>
+        <select class="form-control" id="POST_COMMANDS_RESPONSE_TYPE" name="POST_COMMANDS_RESPONSE_TYPE">
+            <option {% for p in parameters if p.key == p.POST_COMMANDS_RESPONSE_TYPE and p.value =='ACCEPTED' %}selected{% endfor %}>ACCEPTED</option>
+            <option {% for p in parameters if p.key == p.POST_COMMANDS_RESPONSE_TYPE and p.value =='NOT_SUPPORTED' %}selected{% endfor %}>NOT_SUPPORTED</option>
+            <option {% for p in parameters if p.key == p.POST_COMMANDS_RESPONSE_TYPE and p.value =='REJECTED' %}selected{% endfor %}>REJECTED</option>
+            <option {% for p in parameters if p.key == p.POST_COMMANDS_RESPONSE_TYPE and p.value =='TIMEOUT' %}selected{% endfor %}>TIMEOUT</option>
+            <option {% for p in parameters if p.key == p.POST_COMMANDS_RESPONSE_TYPE and p.value =='UNKNOWN_SESSION' %}selected{% endfor %}>UNKNOWN_SESSION</option>
+        </select>
+    </div>
+    <button type="button" class="btn btn-primary"
+            onclick="setWebserviceParameters()">
+        Save
+    </button>
+</form><br/><br/>
+
+<ul class="list-group">
+  <li class="list-group-item active font-weight-bold">Request template</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">URL</li>
+  <li class="list-group-item">
+  {{constants.SERVER_URL}}/ocpi/cpo/2.1.1/commands/START_SESSION</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">HTTP Verb</li>
+  <li class="list-group-item">POST</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">Headers</li>
+  <li class="list-group-item">Authorization : Token {% for p in parameters if p.key == p.AUTHORISATION_TOKEN_TOSERVER %}{{ p.value }}{% endfor %}</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">Body</li>
+  <li class="list-group-item">
+{<br/>
+  "response_url": "{COMMANDS_RESPONSE_URL}",<br/>
+  "token": {<br/>
+    "uid": "{COMMANDS_TOKEN_UID}",<br/>
+    "type": "{COMMANDS_TOKEN_TYPE}",<br/>
+    "auth_id": "{COMMANDS_TOKEN_AUTH_ID}",<br/>
+    "visual_number": "{COMMANDS_TOKEN_VISUAL_NUMBER}",<br/>
+    "issuer": "{COMMANDS_TOKEN_ISSUER}",<br/>
+    "valid": {COMMANDS_TOKEN_VALID},<br/>
+    "whitelist": "{COMMANDS_TOKEN_WHITELIST}",<br/>
+    "language": "{COMMANDS_TOKEN_LANGUAGE}",<br/>
+    "last_updated": "{COMMANDS_TOKEN_LAST_UPDATED}"<br/>
+  },<br/>
+  "location_id": "{COMMANDS_LOCATION_ID}",<br/>
+  "evse_uid": "{COMMANDS_EVSE_UID}"<br/>
+}</li>
+</ul>

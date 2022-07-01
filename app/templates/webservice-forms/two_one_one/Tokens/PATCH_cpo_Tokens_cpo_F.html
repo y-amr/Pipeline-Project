@@ -1,0 +1,24 @@
+<form id="launchRequest" action="/">
+    <div class="form-group">
+        <label for="token_uid">Token uid</label>
+        <input type="text" class="form-control" id="token_uid" name="token_uid" placeholder="default : {{constants.DEFAULT_ID_CONSTANT}}"/>
+    </div>
+    <div class="form-group">
+        <label for="request_template">Request template : </label>
+        <textarea class="form-control" id="request_template" name="request_template" style="padding-bottom:25px;" rows="10">
+{
+    "uid": "12345ABCD",
+    "type": "RFID",
+    "auth_id": "12345ABCD_auth_id",
+    "visual_number": "12345ABCD_visual_number",
+    "issuer": "12345ABCD_issuer",
+    "valid": true,
+    "whitelist": "NEVER",
+    "last_updated": "2020-01-01T00:00:00Z"
+}</textarea>
+    </div>
+    <button type="button" class="btn btn-primary"
+            onclick="launchForm('/fromserver/ocpi/emsp/2.1.1/tokens/PATCH_cpo_Tokens');">
+        Send
+    </button>
+</form>

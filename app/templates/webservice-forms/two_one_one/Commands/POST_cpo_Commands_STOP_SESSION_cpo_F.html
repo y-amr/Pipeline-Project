@@ -1,0 +1,15 @@
+<form id="launchRequest" action="/">
+    <div class="form-group">
+        <label for="request_template">Request template : </label>
+        <textarea class="form-control" id="request_template" name="request_template" style="padding-bottom:25px;"
+                  rows="15">
+{
+  "session_id": "{{constants.DEFAULT_ID_CONSTANT}}",
+  "response_url": "https://gireve.com"
+}</textarea>
+    </div>
+    <button type="button" class="btn btn-primary"
+            onclick="launchForm('/fromserver/ocpi/emsp/2.1.1/commands/POST_cpo_Commands-STOP_SESSION');">
+        Send
+    </button>
+</form>

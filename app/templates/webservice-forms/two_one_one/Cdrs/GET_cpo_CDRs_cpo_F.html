@@ -1,0 +1,23 @@
+<form id="launchRequest" action="/">
+    <div class="form-group">
+        <label for="limit">limit</label>
+        <input type="number" class="form-control" id="limit" name="limit" placeholder="Not sent if empty"/>
+    </div>
+    <div class="form-group">
+        <label for="offset">offset</label>
+        <input type="number" class="form-control" id="offset" name="offset" placeholder="Not sent if empty"/>
+    </div>
+    <div class="form-group">
+        <label for="date_from">date_from</label>
+        <input type="text" class="form-control" id="date_from" name="date_from" placeholder="Not sent if empty"/>
+    </div>
+    <div class="form-group">
+        <label for="offset">date_to</label>
+        <input type="text" class="form-control" id="date_to" name="date_to" placeholder="Not sent if empty"/>
+    </div>
+    </div>
+    <button type="button" class="btn btn-primary"
+            onclick="launchForm('/fromserver/ocpi/emsp/2.1.1/cdrs/GET_cpo_Cdrs');">
+        Send
+    </button>
+</form>

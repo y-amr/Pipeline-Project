@@ -1,0 +1,10 @@
+<form id="launchRequest" action="/">
+    <div class="form-group">
+        <label for="token_uid">Token uid</label>
+        <input type="text" class="form-control" id="token_uid" name="token_uid" placeholder="default : 111111"/>
+    </div>
+    <button type="button" class="btn btn-primary"
+            onclick="launchForm('/fromserver/ocpi/emsp/2.1.1/tokens/GET_cpo_Tokens');">
+        Send
+    </button>
+</form>

@@ -1,0 +1,101 @@
+<ul class="list-group">
+  <li class="list-group-item active font-weight-bold">Request template</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">URL</li>
+  <li class="list-group-item">
+  {{constants.SERVER_URL}}/ocpi/emsp/2.1.1/cdrs</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">HTTP Verb</li>
+  <li class="list-group-item">POST</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">Headers</li>
+  <li class="list-group-item">content-type : application/json</li>
+  <li class="list-group-item">Authorization : Token {% for p in parameters if p.key == p.AUTHORISATION_TOKEN_TOSERVER %}{{ p.value }}{% endfor %}</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">Body</li>
+  <li class="list-group-item">{<br/>
+	"auth_id": "{CDR_AUTH_ID}",<br/>
+	"auth_method": "{CDR_AUTH_METHOD}",<br/>
+	"charging_periods": [<br/>
+		{<br/>
+			"dimensions": [<br/>
+				{<br/>
+					"type": "{CDR_CHARGING_PERIODS_TYPE}",<br/>
+					"volume": {CDR_CHARGING_PERIODS_VOLUME}<br/>
+				}<br/>
+			],<br/>
+			"start_date_time": "{CDR_CHARGING_PERIODS_START_DATE_TIME}"<br/>
+		}<br/>
+	],<br/>
+	"currency": "{CDR_CURRENCY}",<br/>
+	"id": "{CDR_ID}",<br/>
+	"last_updated": "{CDR_LAST_UPDATED}",<br/>
+	"location": {<br/>
+        "id": "{CDR_LOCATION_ID}",<br/>
+        "type": "{CDR_LOCATION_TYPE}",<br/>
+        "name": "{CDR_LOCATION_NAME}",<br/>
+        "address": "{CDR_LOCATION_ADDRESS}",<br/>
+        "city": "{CDR_LOCATION_CITY}",<br/>
+        "postal_code": "{CDR_LOCATION_POSTAL_CODE}",<br/>
+        "country": "{CDR_LOCATION_COUNTRY}",<br/>
+        "coordinates": {<br/>
+            "latitude": "{CDR_LOCATION_LATITUDE}",<br/>
+            "longitude": "{CDR_LOCATION_LONGITUDE}"<br/>
+        },<br/>
+        "evses": [<br/>
+            {<br/>
+                "uid": "{CDR_LOCATION_EVSE_UID}",<br/>
+                "evse_id": "{CDR_LOCATION_EVSE_EVSE_ID}",<br/>
+                "status": "{CDR_LOCATION_EVSE_STATUS}",<br/>
+                "status_schedule": [],<br/>
+                "capabilities": [],<br/>
+                "connectors": [<br/>
+                    {<br/>
+                        "id": "{CDR_LOCATION_CONNECTOR_ID}",<br/>
+                        "standard": "{CDR_LOCATION_CONNECTOR_STANDARD}",<br/>
+                        "format": "{CDR_LOCATION_CONNECTOR_FORMAT}",<br/>
+                        "power_type": "{CDR_LOCATION_CONNECTOR_POWER_TYPE}",<br/>
+                        "voltage": {CDR_LOCATION_CONNECTOR_VOLTAGE},<br/>
+                        "amperage": {CDR_LOCATION_CONNECTOR_AMPERAGE},<br/>
+                        "tariff_id": "{CDR_LOCATION_CONNECTOR_TARIFF_ID}",<br/>
+                        "last_updated": "{CDR_LOCATION_CONNECTOR_LAST_UPDATED}"<br/>
+                    }<br/>
+                ],<br/>
+                "floor_level": "{CDR_LOCATION_FLOOR_LEVEL}",<br/>
+                "coordinates": {<br/>
+                    "latitude": "{CDR_LOCATION_EVSE_LATITUDE}",<br/>
+                    "longitude": "{CDR_LOCATION_EVSE_LONGITUDE}"<br/>
+                },<br/>
+                "physical_reference": "{CDR_LOCATION_EVSE_PHYSICAL_REFERENCE}",<br/>
+                "last_updated": "{CDR_LOCATION_EVSE_LAST_UPDATED}"<br/>
+            }
+        ],<br/>
+        "directions": [],<br/>
+        "operator": {<br/>
+            "name" : "{CDR_LOCATION_OPERATOR_NAME}"<br/>
+        },<br/>
+        "facilities": ["{CDR_LOCATION_FACILITIES}"],<br/>
+        "charging_when_closed": {CDR_LOCATION_CHARGING_WHEN_CLOSED},<br/>
+        "last_updated": "{CDR_LOCATION_LAST_UPDATED}"<br/>
+    },<br/>
+	"start_date_time": "{CDR_START_DATE_TIME}",<br/>
+	"stop_date_time": "{CDR_STOP_DATE_TIME}",<br/>
+	"tariffs": [<br/>
+		{<br/>
+			"currency": "{CDR_TARIFFS_CURRENCY}",<br/>
+			"elements": [<br/>
+				{<br/>
+					"price_components": [<br/>
+						{<br/>
+							"price": {CDR_TARIFFS_PRICE},<br/>
+							"step_size": {CDR_TARIFFS_STEP_SIZE},<br/>
+							"type": "{CDR_TARIFFS_TYPE}"<br/>
+						}<br/>
+					]<br/>
+				}<br/>
+			],<br/>
+			"id": "{CDR_TARIFFS_ID}",<br/>
+			"last_updated": "{CDR_TARIFFS_LAST_UPDATED}"<br/>
+		}<br/>
+	],<br/>
+	"total_cost": {CDR_TOTAL_COST},<br/>
+	"total_energy": {CDR_TOTAL_ENERGY},<br/>
+	"total_time": {CDR_TOTAL_TIME}<br/>
+}</li>
+</ul>

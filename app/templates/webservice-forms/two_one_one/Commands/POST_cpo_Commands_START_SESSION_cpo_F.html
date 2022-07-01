@@ -1,0 +1,25 @@
+<form id="launchRequest" action="/">
+    <div class="form-group">
+        <label for="request_template">Request template : </label>
+        <textarea class="form-control" id="request_template" name="request_template" style="padding-bottom:25px;"
+                  rows="15">
+{
+  "location_id": "{{constants.DEFAULT_ID_CONSTANT}}",
+  "response_url": "https://gireve.com",
+  "token": {
+    "auth_id": "AUTH_ID",
+    "issuer": "ISSUER",
+    "last_updated": "2020-01-01T00:00:00Z",
+    "type": "OTHER",
+    "uid": "{{constants.DEFAULT_ID_CONSTANT}}",
+    "valid": true,
+    "visual_number": "VISUAL_NUMBER",
+    "whitelist": "NEVER"
+  }
+}</textarea>
+    </div>
+    <button type="button" class="btn btn-primary"
+            onclick="launchForm('/fromserver/ocpi/emsp/2.1.1/commands/POST_cpo_Commands-START_SESSION');">
+        Send
+    </button>
+</form>

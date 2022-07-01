@@ -1,0 +1,27 @@
+<form id="setWebserviceParameters" action="/">
+    <div class="form-group">
+        <label for="GET_CDRS_FOUND">Cdrs found on server side</label>
+        <select class="form-control" id="GET_CDRS_FOUND" name="GET_CDRS_FOUND">
+            <option {% for p in parameters if p.key == p.GET_CDRS_FOUND and p.value == constants.YES_CONSTANT %}selected{% endfor %}>{{constants.YES_CONSTANT}}</option>
+            <option {% for p in parameters if p.key == p.GET_CDRS_FOUND and p.value == constants.NO_CONSTANT %}selected{% endfor %}>{{constants.NO_CONSTANT}}</option>
+        </select>
+    </div>
+    <button type="button" class="btn btn-primary"
+            onclick="setWebserviceParameters()">
+        Save
+    </button>
+</form><br/><br/>
+
+<ul class="list-group">
+  <li class="list-group-item active font-weight-bold">Request template</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">URL</li>
+  <li class="list-group-item">
+  {{constants.SERVER_URL}}/ocpi/emsp/2.1.1/cdrs/{CDRS_ID}<br/> (Depends on URLs returned by the eMSP)</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">HTTP Verb</li>
+  <li class="list-group-item">GET</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">Headers</li>
+  <li class="list-group-item">Authorization : Token {% for p in parameters if p.key == p.AUTHORISATION_TOKEN_TOSERVER %}{{ p.value }}{% endfor %}</li>
+  <li class="list-group-item list-group-item-primary font-weight-bold">Body</li>
+  <li class="list-group-item">Empty</li>
+</ul>
+
